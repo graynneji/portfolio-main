@@ -1,0 +1,501 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --pink: #671cc9;
+  --lightAccent: #f4edfca1;
+  --text: #283252;
+  --purple: rgb(107 92 229);
+  --bgProject: #4e4e4e;
+  --tertiary: #275586;
+  --primary: #292929;
+  --bgHighlight:rgb(29 29 29);
+  --blue: rgb(68 157 209);
+  --bg: #fff;
+}
+
+@font-face {
+	font-family: 'Glimer-Outlined';
+	src: url(../../assets/Gilmer-Font/Gilmer\ Outline.otf);
+}
+
+@font-face {
+	font-family: 'Glimer-Bold';
+	src: url(../../assets/Gilmer-Font/Gilmer\ Bold.otf);
+}
+
+.smooth {
+	@apply transition-all ease-in duration-300;
+}
+
+.max-w-container {
+	@apply max-w-[75rem] mx-auto px-6 md:px-12;
+
+	border-left: 1px;
+	border-right: 1px;
+	border-color: #00000020;
+	border-style: solid;
+
+	background-color: var(--bg);
+}
+
+.nav-link {
+	@apply text-[var(--text)] text-sm hover:text-[var(--pink)] transition duration-500 ease-in-out;
+}
+
+.btn-primary {
+	@apply rounded-full w-fit text-[var(--primary)] hover:border-[var(--pink)] hover:text-[var(--pink)] 
+	transition duration-500 ease-in-out font-medium 
+	border-[1px] focus:outline-none flex items-center justify-center 
+	border-[#00000020] py-3 px-6 text-lg xl:text-xl 2xl:text-2xl my-10;
+}
+
+.icon-container {
+	@apply rounded-full flex justify-center items-center border-[1px] border-[#00000020] transition duration-500 ease-in-out py-2 px-5 hover:border-[var(--pink)];
+}
+
+.project-icon {
+	@apply w-10 h-10;
+}
+
+.contact-icon {
+	@apply h-7 w-7;
+}
+
+.section-title {
+	@apply text-[var(--pink)] font-semibold text-[4.1rem] lg:text-[5.9rem] xl:text-[6.3rem] font-Glimer-Outlined;
+
+	line-height: 1;
+}
+
+.main-title {
+	@apply text-[var(--pink)] pb-8 font-semibold font-Glimer-Outlined;
+}
+
+.scrollbar-none {
+	scrollbar-width: none;
+}
+
+.fade-x {
+	mask-image: linear-gradient(270deg, transparent 0 .5%, #11253a 3% 97%, transparent 99.5% 100%);
+
+	@media (min-width: 1024px) {
+		mask-image: none;
+	}	
+}
+
+.footer-link {
+	@apply hover:text-[#420fe7] transition duration-500 ease-in-out;
+}
+
+@layer base {
+	html,
+	body {
+		font-family: 'Bricolage Grotesque', sans-serif;
+		background: var(--bg);
+		color: var(--text);
+	}
+
+	.img {
+		will-change: scale;
+	}
+
+	.img-container {
+		will-change: width;
+	}
+
+	.container {
+		will-change: visibility;
+	}
+
+	.cursor {
+		pointer-events: none;
+	}
+
+	.cursor__ball {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 1000;
+	}
+
+	.img-container::after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		right: 0;
+		background: #fcfcfc;
+	}
+}
+
+header {
+	nav {
+		@apply fixed inset-x-0 z-50 top-0 backdrop-blur-md;
+
+		> div {
+			@apply flex justify-between items-center h-[5rem] max-w-container border-b border-[#00000020];
+
+			a {
+				@apply nav-link text-[var(--primary)] font-bold;
+			}
+
+			> div {
+				@apply hidden md:flex items-center space-x-10 text-[var(--bgProject)];
+
+				a {
+					@apply nav-link;
+				}
+			}
+
+			button {
+				@apply md:hidden;
+
+				i {
+					@apply text-[var(--text)] text-2xl;
+				}
+
+				.fa-bars {
+					@apply block;
+				}
+
+				.fa-xmark {
+					@apply hidden;
+				}
+			}
+		}
+
+		&.visible {
+			> div {
+				a {
+					color: #242424;
+				}
+
+				button {
+					.fa-bars {
+						@apply hidden;
+					}
+
+					.fa-xmark {
+						@apply block;
+						color: #242424;
+					}
+				}
+			}
+		}
+	}
+
+	.pop-up {
+		@apply fixed inset-0 text-[var(--text)] p-10 hidden flex-col items-center justify-center text-2xl font-semibold space-y-10 z-40
+		bg-[#fff];
+
+		a {
+			@apply text-4xl hover:text-[var(--pink)] transition-colors duration-300 ease-in-out;
+
+			animation-delay: .3s;
+			animation-timing-function: cubic-bezier(.165,.84,.44,1);
+			animation-name: AuxFadeInUp;
+			animation-duration: 1s;
+			animation-fill-mode: both;
+			opacity: 0;
+		}
+	}
+
+	.pop-up.visible {
+		@apply flex;
+	}
+
+	.hero {
+		@apply min-h-screen flex flex-col md:justify-center pt-[5.8rem] max-w-container;
+
+		.info {
+			@apply grid lg:grid-cols-2 gap-10 lg:gap-20 xl:gap-10;
+
+			h1 {
+				animation-timing-function: cubic-bezier(.165,.84,.44,1);
+				animation-name: AuxFadeInLeft1;
+				animation-duration: 1s;
+				animation-fill-mode: both;
+				opacity: 0;
+			}
+
+			> div {
+				@apply space-y-5;
+				animation-delay: .3s;
+				animation-timing-function: cubic-bezier(.165,.84,.44,1);
+				animation-name: AuxFadeInUp;
+				animation-duration: 1s;
+				animation-fill-mode: both;
+				opacity: 0;
+
+				.links {
+					@apply flex items-center space-x-4;
+				}
+			}
+		}
+
+		.btn-primary {
+			@apply mt-7 sm:mt-[2.5rem];
+		}
+	}
+}
+
+#services > div {
+	h1 {
+		@apply text-[3rem] md:text-[3.5rem] uppercase;
+	}
+
+	.skills {
+		@apply pb-3;
+	}
+}
+
+main {
+	@apply w-full;
+
+	.skill-list {
+		@apply flex flex-wrap gap-2 mb-16;
+
+		span {
+			@apply text-[1rem] p-2 px-3 font-semibold text-[var(--text)] bg-[#fff] rounded-lg border border-[#e5e5e5] cursor-pointer;
+
+			transition: all .3s;
+
+			&:hover {
+				transform: translateY(-5px);
+				box-shadow: -1px 3px 10px 0 rgba(0,0,0,.06);
+				border-color: var(--pink);
+				color: var(--pink);
+			}
+		}
+	}
+
+	.projects {
+		@apply lg:flex lg:gap-10 max-w-container;
+
+		.project-nav {
+			@apply overflow-x-scroll border-[#00000010] scrollbar-none
+			flex items-end fade-x px-[8px] pb-4 sm:pr-0 sm:pl-[12px] lg:pl-0
+			lg:block lg:h-fit lg:text-right lg:w-[9rem] lg:flex-shrink-0 lg:pb-0 lg:space-x-0;
+
+			a {
+				@apply text-[var(--text)] hover:text-[var(--pink)] smooth
+				flex flex-col items-center text-center flex-shrink-0
+				lg:block lg:text-right lg:flex-row p-4 relative;
+
+				&::before {
+					content: '';
+					display: block;
+					background-color: #00000010;
+					position: absolute;
+				}
+
+				@media (max-width: 1024px) {
+					&::before {
+						top: 100%;
+						height: 1px;
+						left: 0;
+						right: 0;
+					}
+				}
+
+				@media (min-width: 1024px) {
+					&::before {
+						top: 0;
+						bottom: 0;
+						width: 1px;
+						right: 0;
+					}
+				}
+
+				&.active {
+					@apply text-[var(--pink)] hover:text-[var(--pink)] bg-[var(--lightAccent)];
+
+					&::before {
+						background-color: var(--pink);
+					}
+
+					@media (max-width: 1024px) {
+						&::before {
+							height: 2px;
+						}
+					}
+
+					@media (min-width: 1024px) {
+						&::before {
+							width: 2px;
+						}
+					}
+				}
+			}
+		}
+
+		.project-info {
+
+			.project {
+				@apply mt-3 lg:mt-0 lg:h-[440px] lg:max-h-[440px] lg:grid-cols-2 gap-5 hidden;
+
+				&.visible {
+					@apply grid;
+				}
+
+				.description .name, .description .actions {
+					@apply p-8 rounded-sm;
+				}
+
+				.image {
+					/* @apply smooth; */
+					@apply hover:opacity-80 transition-all duration-300 ease-in-out;
+
+					img {
+						@apply w-full h-[300px] md:h-[350px] lg:h-[440px] m-auto object-cover smooth border border-[#00000020] rounded-sm;
+
+						animation-delay: .15s;
+						animation-timing-function: cubic-bezier(.165,.84,.44,1);
+						animation-name: AuxFadeInUp;
+						animation-duration: 1s;
+						animation-fill-mode: both;
+						opacity: 0;
+					}
+				}
+
+				.description {
+					@apply lg:grid lg:grid-rows-2 border border-[#00000020] lg:border-none lg:gap-5 lg:bg-transparent;
+
+					.name {
+						@apply flex flex-col pb-0 lg:pb-8 justify-between lg:border border-[#00000020] space-y-5 lg:space-y-0;
+
+						h1 {
+							@apply text-3xl font-bold;
+
+							a {
+								@apply transition-all duration-300 ease-in-out;
+							}
+
+							&:hover a {
+								color: var(--pink) !important;
+							}
+						}
+					}
+
+					.actions {
+						@apply flex flex-col justify-between space-y-5 lg:space-y-0 lg:border border-[#00000020];
+
+						.stack {
+							@apply flex flex-wrap;
+
+							img {
+								border-radius: 15px;
+								margin-right: 4px;
+								margin-bottom: 4px;
+							}
+						}
+
+						.links {
+							@apply space-x-5; 
+
+							a {
+								@apply hover:text-[var(--pink)] transition-all ease-in-out duration-300;
+							}
+						}
+					}
+
+					.name, .actions {
+						* {
+							animation-delay: .3s;
+							animation-timing-function: cubic-bezier(.165,.84,.44,1);
+							animation-name: AuxFadeInUp;
+							animation-duration: 1s;
+							animation-fill-mode: both;
+							opacity: 0;
+						}
+					}
+				}
+			}
+		}
+
+		&.animate {
+			animation-delay: .2s;
+			animation-timing-function: cubic-bezier(.165,.84,.44,1);
+			animation-name: AuxFadeInUp;
+			animation-duration: 1s;
+			animation-fill-mode: both;
+			opacity: 0;
+		}
+	}
+}
+
+footer {
+	@apply flex flex-col justify-center relative;
+
+	.desc {
+		@apply space-y-7 md:space-y-12 relative;
+
+		.details {
+			@apply relative z-10 py-[5rem] md:py-[12rem];
+
+			&.animate {
+				animation-delay: .2s;
+				animation-timing-function: cubic-bezier(.165,.84,.44,1);
+				animation-name: AuxFadeInUp;
+				animation-duration: 1s;
+				animation-fill-mode: both;
+				opacity: 0;
+			}
+
+			> h1 {
+				font-size: 4.5rem;
+			}
+			
+			.actions {
+				@apply flex flex-col space-y-5 md:space-y-0 md:flex-row md:items-center md:gap-16 my-10;
+	
+				.links {
+					@apply flex items-center space-x-4;
+				}
+			}
+		}
+	}
+
+	nav {
+		@apply py-6 max-w-container flex justify-between w-full absolute bottom-2 right-0 left-0 border-t border-[#00000020];
+
+		p {
+			@apply text-sm;
+		}
+	}
+}
+
+@keyframes AuxFadeInUp {
+	0% {
+		opacity: 0;
+		transform: translate3d(0,27px,0);
+	}
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+
+@keyframes AuxFadeInLeft1 {
+	0% {
+ 	 	opacity: 0;
+		transform: translate3d(-50px,0,0);
+	}
+	100% {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes AuxFadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
